@@ -5,7 +5,7 @@
     "tags": [],
     "title": "Finish Kotlin v2.3.0 upgrade",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -17,6 +17,19 @@
         "minute": 25,
         "second": 25,
         "nano": 801941000
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 16,
+        "minute": 46,
+        "second": 39,
+        "nano": 879948000
       }
     },
     "isImported": false
@@ -71,7 +84,7 @@
     "tags": [],
     "title": "Manual test",
     "description": "",
-    "status": "TODO",
+    "status": "IN_PROGRESS",
     "date": {
       "date": {
         "year": 2026,
