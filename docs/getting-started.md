@@ -26,7 +26,7 @@ This will:
 ## 2. Start the Grafana Observability Stack
 
 ```bash
-./gradlew startGrafana
+./gradlew startGrafanaContainer
 ```
 
 This starts the `grafana/otel-lgtm` container providing:
@@ -40,7 +40,7 @@ This starts the `grafana/otel-lgtm` container providing:
 To check the stack status:
 
 ```bash
-./gradlew checkGrafana
+./gradlew checkGrafanaContainer
 ```
 
 ---
@@ -133,7 +133,7 @@ Expected response (`404 Not Found`):
 ## 5. Stop Everything
 
 ```bash
-./gradlew stopGrafana
+./gradlew stopGrafanaContainer
 ```
 
 Services can be stopped with `Ctrl+C` in each terminal.
