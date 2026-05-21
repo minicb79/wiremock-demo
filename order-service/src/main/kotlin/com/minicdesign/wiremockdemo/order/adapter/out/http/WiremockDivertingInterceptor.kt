@@ -2,6 +2,7 @@ package com.minicdesign.wiremockdemo.order.adapter.out.http
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpRequest
 import org.springframework.http.HttpStatusCode
@@ -14,6 +15,7 @@ import java.io.ByteArrayInputStream
 import java.io.InputStream
 
 @Component
+@Profile("!prod")
 class WiremockDivertingInterceptor(
     private val wiremockRestClient: RestClient,
     @param:Value("\${feature.wiremock-via-interceptor:false}") private val featureEnabled: Boolean,

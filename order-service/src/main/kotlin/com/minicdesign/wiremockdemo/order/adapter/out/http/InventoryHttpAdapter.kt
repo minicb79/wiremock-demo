@@ -3,6 +3,7 @@ package com.minicdesign.wiremockdemo.order.adapter.out.http
 import com.minicdesign.wiremockdemo.order.domain.port.out.InventoryPort
 import com.minicdesign.wiremockdemo.order.generated.inventoryapi.model.InventoryResponse
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.ObjectProvider
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.client.HttpClientErrorException
@@ -12,15 +13,19 @@ import org.springframework.web.client.RestClient
 class InventoryHttpAdapter(
     restClientBuilder: RestClient.Builder,
     @Value("\${services.inventory.base-url}") inventoryBaseUrl: String,
-    wiremockDivertingInterceptor: WiremockDivertingInterceptor,
+    wiremockDivertingInterceptorProvider: ObjectProvider<WiremockDivertingInterceptor>,
 ) : InventoryPort {
     private val logger = LoggerFactory.getLogger(InventoryHttpAdapter::class.java)
 
     private val restClient: RestClient =
-        restClientBuilder
-            .baseUrl(inventoryBaseUrl)
-            .requestInterceptor(wiremockDivertingInterceptor)
-            .build()
+        run {
+            wiremockDivertingInterceptorProvider.ifAvailable { interceptor ->
+                restClientBuilder.requestInterceptor(interceptor)
+            }
+            restClientBuilder
+                .baseUrl(inventoryBaseUrl)
+                .build()
+        }
 
     override fun getAvailableQuantity(productId: String): Int? {
         logger.info("Calling inventory-service for productId={}", productId)
