@@ -62,7 +62,7 @@
     "tags": [],
     "title": "Add Wiremock",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -74,6 +74,19 @@
         "minute": 4,
         "second": 15,
         "nano": 84983000
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 23,
+        "minute": 22,
+        "second": 43,
+        "nano": 694065000
       }
     },
     "isImported": false
@@ -119,7 +132,7 @@
     "tags": [],
     "title": "Add interceptor solution",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -131,6 +144,19 @@
         "minute": 56,
         "second": 35,
         "nano": 771625000
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 23,
+        "minute": 22,
+        "second": 51,
+        "nano": 518752000
       }
     },
     "isImported": false
@@ -153,6 +179,28 @@
         "minute": 56,
         "second": 58,
         "nano": 229548000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_72",
+    "priority": "HIGH",
+    "tags": [],
+    "title": "Can Wiremock docker container log to Grafana",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 23,
+        "minute": 23,
+        "second": 56,
+        "nano": 402987000
       }
     },
     "isImported": false

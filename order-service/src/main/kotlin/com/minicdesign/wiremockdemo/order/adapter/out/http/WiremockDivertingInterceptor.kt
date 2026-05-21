@@ -19,6 +19,7 @@ import java.io.InputStream
 class WiremockDivertingInterceptor(
     private val wiremockRestClient: RestClient,
     @param:Value("\${feature.wiremock-via-interceptor:false}") private val featureEnabled: Boolean,
+    @param:Value("\${services.wiremock.base-url}") private val wiremockBaseUrl: String,
 ) : ClientHttpRequestInterceptor {
     private val logger = LoggerFactory.getLogger(WiremockDivertingInterceptor::class.java)
 
@@ -29,21 +30,37 @@ class WiremockDivertingInterceptor(
     ): ClientHttpResponse {
         val uri = request.uri
 
+        logger.info("========================================= WIREMOCK INTERCEPTOR =========================================")
+        logger.info("[WireMock Interceptor] Intercepting request: {} {}", request.method, uri)
+
         // Divert calls when feature flag is enabled and productId is PROD-800
         if (featureEnabled && uri.path.contains("PROD-800")) {
-            logger.info("Diverting call to WireMock for URI: {} since productId is PROD-800", uri)
             val pathWithQuery = uri.path + (uri.query?.let { "?$it" } ?: "")
+            val targetUri = "$wiremockBaseUrl$pathWithQuery"
+            logger.info("[WireMock Interceptor] MATCH DETECTED for product 'PROD-800'.")
+            logger.info("[WireMock Interceptor] DIVERTING request to WireMock: {} -> {}", uri, targetUri)
 
             val responseEntity =
-                wiremockRestClient
-                    .method(request.method)
-                    .uri(pathWithQuery)
-                    .headers { headers ->
-                        headers.putAll(request.headers)
-                    }.body(body)
-                    .retrieve()
-                    .toEntity(ByteArray::class.java)
+                try {
+                    val response =
+                        wiremockRestClient
+                            .method(request.method)
+                            .uri(pathWithQuery)
+                            .headers { headers ->
+                                headers.putAll(request.headers)
+                            }.body(body)
+                            .retrieve()
+                            .toEntity(ByteArray::class.java)
 
+                    logger.info("[WireMock Interceptor] SUCCESS: Received response from WireMock: {}", response.statusCode)
+                    response
+                } catch (ex: Exception) {
+                    logger.error("[WireMock Interceptor] ERROR during diversion to WireMock: {}", ex.message, ex)
+                    logger.info("=========================================================================================================")
+                    throw ex
+                }
+
+            logger.info("=========================================================================================================")
             return object : ClientHttpResponse {
                 override fun getStatusCode(): HttpStatusCode = responseEntity.statusCode
 
@@ -57,6 +74,8 @@ class WiremockDivertingInterceptor(
             }
         }
 
+        logger.info("[WireMock Interceptor] NO MATCH for product 'PROD-800'. Proceeding with standard execution.")
+        logger.info("=========================================================================================================")
         return execution.execute(request, body)
     }
 }
