@@ -1,0 +1,74 @@
+openapi: "3.1.0"
+info:
+  title: Inventory Service API
+  description: Provides stock availability information for products.
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:8081
+    description: Local development server
+
+paths:
+  /inventory/{productId}:
+    get:
+      summary: Get inventory for a product
+      description: Returns the current stock availability for the given product ID.
+      operationId: getInventory
+      tags:
+        - Inventory
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: The unique identifier of the product.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Inventory item found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryResponse"
+        "404":
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    InventoryResponse:
+      type: object
+      required:
+        - productId
+        - quantity
+        - available
+      properties:
+        productId:
+          type: string
+          description: The product identifier.
+          example: "PROD-001"
+        quantity:
+          type: integer
+          format: int32
+          description: Current stock quantity.
+          example: 42
+        available:
+          type: boolean
+          description: Whether the product is available for ordering.
+          example: true
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: "NOT_FOUND"
+        message:
+          type: string
+          example: "Product PROD-001 not found."

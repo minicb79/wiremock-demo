@@ -1,0 +1,21 @@
+[versions]
+springBoot = "4.0.5"
+jakartaValidation = "3.1.1"
+swaggerAnnotations = "2.2.30"
+jacksonDatabindNullable = "0.2.6"
+
+[libraries]
+# Spring Boot managed (versions come from Spring Boot BOM via dependency-management plugin)
+spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
+spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+spring-boot-starter-opentelemetry = { group = "org.springframework.boot", name = "spring-boot-starter-opentelemetry" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
+jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
+micrometer-registry-otlp = { group = "io.micrometer", name = "micrometer-registry-otlp" }
+micrometer-tracing-bridge-otel = { group = "io.micrometer", name = "micrometer-tracing-bridge-otel" }
+
+# OpenAPI generated code compile-time dependencies
+jakartaValidationApi = { group = "jakarta.validation", name = "jakarta.validation-api", version.ref = "jakartaValidation" }
+swaggerAnnotations = { group = "io.swagger.core.v3", name = "swagger-annotations", version.ref = "swaggerAnnotations" }
+jacksonDatabindNullable = { group = "org.openapitools", name = "jackson-databind-nullable", version.ref = "jacksonDatabindNullable" }

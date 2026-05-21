@@ -1,0 +1,21 @@
+root = true
+
+[*.kt]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Disable package-name rule for adapter/in, adapter/out, domain/port/in, domain/port/out
+# These use Kotlin reserved words as package segments, which is idiomatic for Hexagonal Architecture
+[**/adapter/in/**/*.kt]
+ktlint_standard_package-name = disabled
+
+[**/adapter/out/**/*.kt]
+ktlint_standard_package-name = disabled
+
+[**/port/in/**/*.kt]
+ktlint_standard_package-name = disabled
+
+[**/port/out/**/*.kt]
+ktlint_standard_package-name = disabled

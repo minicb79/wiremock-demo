@@ -1,0 +1,102 @@
+openapi: "3.1.0"
+info:
+  title: Order Service API
+  description: Handles order creation for the wiremock-demo platform.
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:8082
+    description: Local development server
+
+paths:
+  /orders:
+    post:
+      summary: Place a new order
+      description: Creates a new order after verifying stock availability with the inventory service.
+      operationId: placeOrder
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlaceOrderRequest"
+      responses:
+        "201":
+          description: Order successfully placed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "409":
+          description: Insufficient stock to fulfil the order.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    PlaceOrderRequest:
+      type: object
+      required:
+        - productId
+        - quantity
+      properties:
+        productId:
+          type: string
+          description: The product identifier to order.
+          example: "PROD-001"
+        quantity:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Number of units to order.
+          example: 5
+
+    OrderResponse:
+      type: object
+      required:
+        - orderId
+        - productId
+        - quantity
+        - status
+      properties:
+        orderId:
+          type: string
+          description: Unique identifier for the created order.
+          example: "ORD-abc123"
+        productId:
+          type: string
+          example: "PROD-001"
+        quantity:
+          type: integer
+          format: int32
+          example: 5
+        status:
+          type: string
+          description: Current order status.
+          enum:
+            - CONFIRMED
+            - REJECTED
+          example: "CONFIRMED"
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: "INSUFFICIENT_STOCK"
+        message:
+          type: string
+          example: "Not enough stock for product PROD-001."
