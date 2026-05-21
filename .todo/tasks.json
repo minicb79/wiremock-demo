@@ -1,0 +1,134 @@
+[
+  {
+    "id": "TASK_1",
+    "priority": "CRITICAL",
+    "tags": [],
+    "title": "Finish Kotlin v2.3.0 upgrade",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 25,
+        "second": 25,
+        "nano": 801941000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3",
+    "priority": "MEDIUM",
+    "tags": [],
+    "title": "Update with idea plugin for managing sourcesets within code",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 25,
+        "second": 45,
+        "nano": 38892000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_6",
+    "priority": "LOW",
+    "tags": [],
+    "title": "Add Wiremock",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 14,
+        "minute": 4,
+        "second": 15,
+        "nano": 84983000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_10",
+    "priority": "CRITICAL",
+    "tags": [],
+    "title": "Manual test",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 14,
+        "minute": 47,
+        "second": 12,
+        "nano": 575800000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_35",
+    "priority": "LOW",
+    "tags": [],
+    "title": "Add interceptor solution",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 14,
+        "minute": 56,
+        "second": 35,
+        "nano": 771625000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_41",
+    "priority": "HIGH",
+    "tags": [],
+    "title": "Feature flag everything",
+    "description": "Define Feature flags:\n- [ ] feature.direct-api-access\n- [ ] feature.wiremock-via-interceptor\n- [ ] feature.wiremock-as-proxy\n- [ ] feature.direct-multiple-endpoints\n- [ ] feature.multi-wiremock-as-proxy\n- [ ] feature.wiremock-as-multi-proxy\n- [ ] feature.secured-apis\n- [ ] feature.nginx\n",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 14,
+        "minute": 56,
+        "second": 58,
+        "nano": 229548000
+      }
+    },
+    "isImported": false
+  }
+]

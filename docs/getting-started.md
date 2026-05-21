@@ -31,11 +31,11 @@ This will:
 
 This starts the `grafana/otel-lgtm` container providing:
 
-| Component | URL |
-|---|---|
+| Component  | URL                                   |
+|------------|---------------------------------------|
 | Grafana UI | http://localhost:3000 (admin / admin) |
-| OTLP gRPC | localhost:4317 |
-| OTLP HTTP | localhost:4318 |
+| OTLP gRPC  | localhost:4317                        |
+| OTLP HTTP  | localhost:4318                        |
 
 To check the stack status:
 
