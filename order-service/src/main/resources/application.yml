@@ -10,6 +10,21 @@ management:
     web:
       exposure:
         include: health,info,metrics,prometheus
+  opentelemetry:
+    resource-attributes:
+      service.name: order-service
+    logging:
+      export:
+        otlp:
+          endpoint: http://localhost:4318/v1/logs
+    tracing:
+      export:
+        otlp:
+          endpoint: http://localhost:4318/v1/traces
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
   tracing:
     sampling:
       probability: 1.0
@@ -17,15 +32,6 @@ management:
 logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} traceId=%X{traceId} spanId=%X{spanId} - %msg%n"
-
-otel:
-  exporter:
-    otlp:
-      endpoint: http://localhost:4318
-      protocol: http/protobuf
-  resource:
-    attributes:
-      service.name: order-service
 
 services:
   inventory:
