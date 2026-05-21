@@ -1,7 +1,7 @@
 package com.minicdesign.wiremockdemo.order.adapter.out.http
 
 import com.minicdesign.wiremockdemo.order.domain.port.out.InventoryPort
-import com.minicdesign.wiremockdemo.order.generated.inventoryapi.model.InventoryResponse
+import com.minicdesign.wiremockdemo.order.inventoryapi.model.InventoryResponse
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.ObjectProvider
 import org.springframework.beans.factory.annotation.Value

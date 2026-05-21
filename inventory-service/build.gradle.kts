@@ -11,5 +11,5 @@ dependencies {
 }
 
 apiGeneration {
-    openApiBasePackage.set("com.minicdesign.wiremockdemo.inventory.generated")
+    openApiBasePackage.set("com.minicdesign.wiremockdemo.inventory")
 }

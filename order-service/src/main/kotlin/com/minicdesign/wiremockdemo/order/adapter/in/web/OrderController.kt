@@ -3,11 +3,11 @@ package com.minicdesign.wiremockdemo.order.adapter.`in`.web
 import com.minicdesign.wiremockdemo.order.application.service.ProductNotFoundException
 import com.minicdesign.wiremockdemo.order.domain.model.OrderStatus
 import com.minicdesign.wiremockdemo.order.domain.port.`in`.PlaceOrderUseCase
-import com.minicdesign.wiremockdemo.order.generated.orderapi.api.OrdersApi
-import com.minicdesign.wiremockdemo.order.generated.orderapi.model.ErrorResponse
-import com.minicdesign.wiremockdemo.order.generated.orderapi.model.OrderResponse
-import com.minicdesign.wiremockdemo.order.generated.orderapi.model.OrderResponse.StatusEnum
-import com.minicdesign.wiremockdemo.order.generated.orderapi.model.PlaceOrderRequest
+import com.minicdesign.wiremockdemo.order.orderapi.api.OrdersApi
+import com.minicdesign.wiremockdemo.order.orderapi.model.ErrorResponse
+import com.minicdesign.wiremockdemo.order.orderapi.model.OrderResponse
+import com.minicdesign.wiremockdemo.order.orderapi.model.OrderResponse.StatusEnum
+import com.minicdesign.wiremockdemo.order.orderapi.model.PlaceOrderRequest
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

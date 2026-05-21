@@ -11,5 +11,5 @@ dependencies {
 }
 
 apiGeneration {
-    openApiBasePackage.set("com.minicdesign.wiremockdemo.order.generated")
+    openApiBasePackage.set("com.minicdesign.wiremockdemo.order")
 }
