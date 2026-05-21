@@ -12,12 +12,14 @@ import org.springframework.web.client.RestClient
 class InventoryHttpAdapter(
     restClientBuilder: RestClient.Builder,
     @Value("\${services.inventory.base-url}") inventoryBaseUrl: String,
+    wiremockDivertingInterceptor: WiremockDivertingInterceptor,
 ) : InventoryPort {
     private val logger = LoggerFactory.getLogger(InventoryHttpAdapter::class.java)
 
     private val restClient: RestClient =
         restClientBuilder
             .baseUrl(inventoryBaseUrl)
+            .requestInterceptor(wiremockDivertingInterceptor)
             .build()
 
     override fun getAvailableQuantity(productId: String): Int? {
