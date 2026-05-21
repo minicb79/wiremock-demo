@@ -15,16 +15,16 @@ services:
       - "${WIREMOCK_HTTPS_PORT:-8443}:8443"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    command: --https-port=8443 --verbose
     environment:
-      - WIREMOCK_ARGS=--https-port=8443 --trust-all-proxy-targets --verbose
-      - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-wiremock-stub}
-      - OTEL_RESOURCE_ATTRIBUTES=service.name=${OTEL_SERVICE_NAME:-wiremock-stub},env=local
-      - OTEL_LOGS_EXPORTER=${OTEL_ENABLED:+otlp}
-      - OTEL_TRACES_EXPORTER=${OTEL_ENABLED:+otlp}
-      - OTEL_METRICS_EXPORTER=${OTEL_ENABLED:+otlp}
+      - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-wiremock-service}
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=${OTEL_SERVICE_NAME:-wiremock-service},env=local
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4317
       - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
-      - JAVA_TOOL_OPTIONS=${OTEL_ENABLED:+-javaagent:/home/libs/opentelemetry-javaagent.jar}
+      - JAVA_TOOL_OPTIONS=-javaagent:/home/libs/stdout-redirect-agent.jar -javaagent:/home/libs/opentelemetry-javaagent.jar
     volumes:
       - ${WIREMOCK_DATA_DIR:-./mocks}:/home/wiremock
       - ./libs:/home/libs
