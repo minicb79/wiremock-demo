@@ -40,7 +40,7 @@
     "tags": [],
     "title": "Update with idea plugin for managing sourcesets within code",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -84,7 +84,7 @@
     "tags": [],
     "title": "Manual test",
     "description": "",
-    "status": "IN_PROGRESS",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -96,6 +96,19 @@
         "minute": 47,
         "second": 12,
         "nano": 575800000
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 21,
+        "minute": 22,
+        "second": 23,
+        "nano": 508525000
       }
     },
     "isImported": false
