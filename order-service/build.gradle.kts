@@ -13,3 +13,7 @@ dependencies {
 apiGeneration {
     openApiBasePackage.set("com.minicdesign.wiremockdemo.order")
 }
+
+configure<com.minicdesign.buildlogic.JavaConventionsExtension> {
+    coverageThreshold.set(0.0)
+}

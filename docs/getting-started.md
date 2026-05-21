@@ -57,6 +57,32 @@ In two separate terminals:
 ./gradlew :order-service:bootRun
 ```
 
+### Feature Flags & Startup Validation
+
+The `order-service` includes two feature flags to control mocking behaviors:
+- `feature.wiremock-via-interceptor`: Diverts specific product requests to WireMock via an HTTP client interceptor.
+- `feature.wiremock-as-proxy`: Routes all external calls as a proxy.
+
+#### Validation Rules
+
+At application startup (during context refresh), a `FeatureFlagValidator` checks these flags:
+1. **NAND Constraint**: `feature.wiremock-via-interceptor` and `feature.wiremock-as-proxy` cannot both be `true` at the same time.
+2. **Production Safety**: Neither mock feature flag is allowed to be `true` when running with the `prod` Spring profile.
+
+If any rule is violated, startup aborts immediately before binding to HTTP ports.
+
+#### Customizing Flags at Runtime
+
+You can pass command-line arguments to override these flags or active profiles:
+
+```bash
+# Running order-service with both flags enabled (fails fast)
+./gradlew :order-service:bootRun --args="--feature.wiremock-via-interceptor=true --feature.wiremock-as-proxy=true"
+
+# Running under prod profile with a mocking flag enabled (fails fast)
+./gradlew :order-service:bootRun --args="--spring.profiles.active=prod --feature.wiremock-via-interceptor=true"
+```
+
 ---
 
 ## 4. Exercise the APIs

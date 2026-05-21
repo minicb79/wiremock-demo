@@ -20,3 +20,7 @@ micrometer-tracing-bridge-otel = { group = "io.micrometer", name = "micrometer-t
 jakartaValidationApi = { group = "jakarta.validation", name = "jakarta.validation-api", version.ref = "jakartaValidation" }
 swaggerAnnotations = { group = "io.swagger.core.v3", name = "swagger-annotations", version.ref = "swaggerAnnotations" }
 jacksonDatabindNullable = { group = "org.openapitools", name = "jackson-databind-nullable", version.ref = "jacksonDatabindNullable" }
+
+# JUnit dependencies managed by Spring Boot BOM
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
