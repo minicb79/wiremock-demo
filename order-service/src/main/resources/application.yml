@@ -36,3 +36,11 @@ logging:
 services:
   inventory:
     base-url: http://localhost:8081
+  wiremock:
+    base-url: http://localhost:8092
+
+feature:
+  wiremock-via-interceptor: false
+  wiremock-as-proxy: false
+  wiremock-use-forward-proxy: false
+

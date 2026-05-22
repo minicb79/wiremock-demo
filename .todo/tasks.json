@@ -166,8 +166,8 @@
     "priority": "HIGH",
     "tags": [],
     "title": "Feature flag everything",
-    "description": "Define Feature flags:\n- [ ] feature.direct-api-access\n- [ ] feature.wiremock-via-interceptor\n- [ ] feature.wiremock-as-proxy\n- [ ] feature.direct-multiple-endpoints\n- [ ] feature.multi-wiremock-as-proxy\n- [ ] feature.wiremock-as-multi-proxy\n- [ ] feature.secured-apis\n- [ ] feature.nginx\n",
-    "status": "TODO",
+    "description": "Define Feature flags:\n- [x] feature.direct-api-access\n- [x] feature.wiremock-via-interceptor\n- [x] feature.wiremock-as-proxy\n- [ ] feature.direct-multiple-endpoints\n- [ ] feature.multi-wiremock-as-proxy\n- [ ] feature.wiremock-as-multi-proxy\n- [ ] feature.secured-apis\n- [ ] feature.nginx\n",
+    "status": "IN_PROGRESS",
     "date": {
       "date": {
         "year": 2026,
@@ -189,7 +189,7 @@
     "tags": [],
     "title": "Can Wiremock docker container log to Grafana",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -201,6 +201,63 @@
         "minute": 23,
         "second": 56,
         "nano": 402987000
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 22
+      },
+      "time": {
+        "hour": 9,
+        "minute": 52,
+        "second": 22,
+        "nano": 124573000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_101",
+    "priority": "HIGH",
+    "tags": [],
+    "title": "Create Wiremock forward proxy for all non-prod environments",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 22
+      },
+      "time": {
+        "hour": 9,
+        "minute": 53,
+        "second": 4,
+        "nano": 370559000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_110",
+    "priority": "LOW",
+    "tags": [],
+    "title": "Create local environment initializer for Wiremock ",
+    "description": "Create a catch all mapping and publish it to wiremock on application startup.",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 22
+      },
+      "time": {
+        "hour": 9,
+        "minute": 54,
+        "second": 14,
+        "nano": 904853000
       }
     },
     "isImported": false

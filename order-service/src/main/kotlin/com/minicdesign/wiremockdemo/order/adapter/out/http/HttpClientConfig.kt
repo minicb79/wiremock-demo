@@ -12,7 +12,11 @@ import java.net.http.HttpClient
 @Profile("!prod")
 class HttpClientConfig {
     @Bean
-    fun wiremockHttpClient(): HttpClient = HttpClient.newBuilder().build()
+    fun wiremockHttpClient(): HttpClient =
+        HttpClient
+            .newBuilder()
+            .version(HttpClient.Version.HTTP_1_1)
+            .build()
 
     @Bean
     fun wiremockRestClient(

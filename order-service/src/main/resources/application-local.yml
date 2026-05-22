@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+feature:
+  wiremock-via-interceptor: false
+  wiremock-as-proxy: false
+  wiremock-use-forward-proxy: false

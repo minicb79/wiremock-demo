@@ -14,7 +14,7 @@ tasks.register("downloadOtelJavaagent") {
         if (!destFile.exists()) {
             destFile.parentFile.mkdirs()
             println("Downloading OpenTelemetry Javaagent...")
-            val url = java.net.URL("https://repo1.maven.org/maven2/io/opentelemetry/javaagent/opentelemetry-javaagent/1.32.0/opentelemetry-javaagent-1.32.0.jar")
+            val url = java.net.URI("https://repo1.maven.org/maven2/io/opentelemetry/javaagent/opentelemetry-javaagent/1.32.0/opentelemetry-javaagent-1.32.0.jar").toURL()
             url.openStream().use { inputStream ->
                 destFile.outputStream().use { outputStream ->
                     inputStream.copyTo(outputStream)
@@ -70,5 +70,6 @@ tasks.register("buildStdoutRedirectAgent") {
 }
 
 tasks.named("startWiremockContainer") {
-    dependsOn("downloadOtelJavaagent", "buildStdoutRedirectAgent")
+    dependsOn("downloadOtelJavaagent", "buildStdoutRedirectAgent", "mergeWiremockSources")
 }
+
