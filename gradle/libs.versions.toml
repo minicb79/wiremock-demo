@@ -4,9 +4,11 @@ jakartaValidation = "3.1.1"
 swaggerAnnotations = "2.2.30"
 jacksonDatabindNullable = "0.2.6"
 pact = "4.6.15"
+lombok = "1.18.46"
 
 
 [libraries]
+lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
 # Spring Boot managed (versions come from Spring Boot BOM via dependency-management plugin)
 spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
 spring-boot-starter-restclient = { group = "org.springframework.boot", name = "spring-boot-starter-restclient" }
