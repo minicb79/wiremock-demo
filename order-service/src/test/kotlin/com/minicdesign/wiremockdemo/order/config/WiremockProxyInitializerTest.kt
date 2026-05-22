@@ -69,12 +69,16 @@ class WiremockProxyInitializerTest {
         org.junit.jupiter.api.Assertions
             .assertEquals("http://host.docker.internal:8081", responseMap["proxyBaseUrl"])
 
-        val expectedRequestCriteria = mapOf(
-            "method" to "ANY",
-            "urlPattern" to "/inventory/.*"
-        )
+        val expectedRequestCriteria =
+            mapOf(
+                "method" to "ANY",
+                "urlPattern" to "/inventory/.*",
+            )
         val expectedBytes = objectMapper.writeValueAsBytes(expectedRequestCriteria)
-        val expectedUuid = java.util.UUID.nameUUIDFromBytes(expectedBytes).toString()
+        val expectedUuid =
+            java.util.UUID
+                .nameUUIDFromBytes(expectedBytes)
+                .toString()
         org.junit.jupiter.api.Assertions
             .assertEquals(expectedUuid, bodyMap["id"])
     }
