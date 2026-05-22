@@ -142,7 +142,26 @@ Control server ports and root directory.
 wiremock {
     port.set(8080)                                    // Default: 8080
     rootDir.set(layout.buildDirectory.dir("merged"))  // Default: build/wiremock/merged (where submodule mappings are combined)
+    serverUrl.set("http://localhost:8080")            // Default: http://localhost:${port}
+    checkMissingOnly.set(false)                       // Default: false for localhost, true for remote hosts
 }
+```
+
+#### Plugin Tasks:
+- **`mergeWiremockSources`**: Recursively scans all submodules for directories named `wiremock/mappings` and `wiremock/__files`. It:
+  - Generates deterministic, request-based UUIDs for stubs missing an explicit ID.
+  - Checks for collisions (fails the build if different request mappings share the same ID, or if identical requests return different responses).
+  - Merges identical duplicate mappings and prints a report.
+- **`startWiremock`**: Starts a background or blocking local WireMock server on the configured `port`, loading mappings from `rootDir`.
+- **`stopWiremock`**: Stops the background local WireMock server.
+- **`publishWiremock`**: Publishes merged stubs from `rootDir` to the configured `serverUrl` via the WireMock Admin API:
+  - If `checkMissingOnly` is `true` (default for remote servers), it performs a diff against deployed mappings and only uploads missing ones.
+  - If `checkMissingOnly` is `false` (default for local servers), it posts all mappings, overwriting existing definitions.
+
+#### CLI Overrides:
+You can dynamically override publishing parameters via Gradle project properties:
+```bash
+./gradlew publishWiremock -Pwiremock.serverUrl=http://my-remote-wiremock:8080 -Pwiremock.checkMissingOnly=true
 ```
 
 ---

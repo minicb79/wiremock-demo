@@ -1,5 +1,6 @@
 package com.minicdesign.wiremockdemo.order.config
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
@@ -7,11 +8,13 @@ import org.springframework.context.annotation.Profile
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
+import java.util.UUID
 
 @Component
 @Profile("local")
 class WiremockProxyInitializer(
     private val wiremockRestClient: RestClient,
+    private val objectMapper: ObjectMapper,
     @param:Value("\${feature.wiremock-as-proxy:false}") private val asProxyEnabled: Boolean,
     @param:Value("\${services.inventory.base-url}") private val inventoryBaseUrl: String,
 ) : CommandLineRunner {
@@ -30,13 +33,19 @@ class WiremockProxyInitializer(
                 .replace("localhost", "host.docker.internal")
                 .replace("127.0.0.1", "host.docker.internal")
 
+        val requestCriteria =
+            mapOf(
+                "method" to "ANY",
+                "urlPattern" to "/inventory/.*",
+            )
+
+        val requestBytes = objectMapper.writeValueAsBytes(requestCriteria)
+        val mappingId = UUID.nameUUIDFromBytes(requestBytes).toString()
+
         val mappingBody =
             mapOf(
-                "request" to
-                    mapOf(
-                        "method" to "ANY",
-                        "urlPattern" to "/inventory/.*",
-                    ),
+                "id" to mappingId,
+                "request" to requestCriteria,
                 "response" to
                     mapOf(
                         "proxyBaseUrl" to targetBaseUrl,

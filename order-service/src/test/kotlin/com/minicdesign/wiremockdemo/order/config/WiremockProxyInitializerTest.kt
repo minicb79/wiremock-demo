@@ -1,5 +1,6 @@
 package com.minicdesign.wiremockdemo.order.config
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.any
@@ -15,9 +16,11 @@ class WiremockProxyInitializerTest {
     @Test
     fun `should not register proxy mapping when feature is disabled`() {
         val restClient = mock(RestClient::class.java)
+        val objectMapper = ObjectMapper()
         val initializer =
             WiremockProxyInitializer(
                 wiremockRestClient = restClient,
+                objectMapper = objectMapper,
                 asProxyEnabled = false,
                 inventoryBaseUrl = "http://localhost:8081",
             )
@@ -33,6 +36,7 @@ class WiremockProxyInitializerTest {
         val postSpec = mock(RestClient.RequestBodyUriSpec::class.java)
         val bodySpec = mock(RestClient.RequestBodySpec::class.java)
         val responseSpec = mock(RestClient.ResponseSpec::class.java)
+        val objectMapper = ObjectMapper()
 
         @Suppress("UNCHECKED_CAST")
         val responseEntity = mock(ResponseEntity::class.java) as ResponseEntity<Void>
@@ -48,6 +52,7 @@ class WiremockProxyInitializerTest {
         val initializer =
             WiremockProxyInitializer(
                 wiremockRestClient = restClient,
+                objectMapper = objectMapper,
                 asProxyEnabled = true,
                 inventoryBaseUrl = "http://localhost:8081",
             )
@@ -63,16 +68,27 @@ class WiremockProxyInitializerTest {
         val responseMap = bodyMap["response"] as Map<*, *>
         org.junit.jupiter.api.Assertions
             .assertEquals("http://host.docker.internal:8081", responseMap["proxyBaseUrl"])
+
+        val expectedRequestCriteria = mapOf(
+            "method" to "ANY",
+            "urlPattern" to "/inventory/.*"
+        )
+        val expectedBytes = objectMapper.writeValueAsBytes(expectedRequestCriteria)
+        val expectedUuid = java.util.UUID.nameUUIDFromBytes(expectedBytes).toString()
+        org.junit.jupiter.api.Assertions
+            .assertEquals(expectedUuid, bodyMap["id"])
     }
 
     @Test
     fun `should log and not throw exception when registration fails`() {
         val restClient = mock(RestClient::class.java)
         `when`(restClient.post()).thenThrow(RuntimeException("Connection refused"))
+        val objectMapper = ObjectMapper()
 
         val initializer =
             WiremockProxyInitializer(
                 wiremockRestClient = restClient,
+                objectMapper = objectMapper,
                 asProxyEnabled = true,
                 inventoryBaseUrl = "http://localhost:8081",
             )
