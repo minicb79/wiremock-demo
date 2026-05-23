@@ -20,14 +20,17 @@ public class WiremockProxyInitializer implements CommandLineRunner {
 	private final RestClient wiremockRestClient;
 	private final ObjectMapper objectMapper;
 	private final boolean asProxyEnabled;
+	private final boolean httpsEnabled;
 	private final String inventoryBaseUrl;
 
 	public WiremockProxyInitializer(RestClient wiremockRestClient, ObjectMapper objectMapper,
 			@Value("${feature.wiremock-as-proxy:false}") boolean asProxyEnabled,
+			@Value("${feature.security-https-enabled:false}") boolean httpsEnabled,
 			@Value("${services.inventory.base-url}") String inventoryBaseUrl) {
 		this.wiremockRestClient = wiremockRestClient;
 		this.objectMapper = objectMapper;
 		this.asProxyEnabled = asProxyEnabled;
+		this.httpsEnabled = httpsEnabled;
 		this.inventoryBaseUrl = inventoryBaseUrl;
 	}
 
@@ -40,7 +43,11 @@ public class WiremockProxyInitializer implements CommandLineRunner {
 
 		log.info("[WiremockProxyInitializer] Wiremock as Proxy is ENABLED. Registering catch-all proxy mapping...");
 
-		String targetBaseUrl = inventoryBaseUrl.replace("localhost", "host.docker.internal").replace("127.0.0.1",
+		String targetBaseUrl = inventoryBaseUrl;
+		if (httpsEnabled && targetBaseUrl.startsWith("http://")) {
+			targetBaseUrl = targetBaseUrl.replace("http://", "https://");
+		}
+		targetBaseUrl = targetBaseUrl.replace("localhost", "host.docker.internal").replace("127.0.0.1",
 				"host.docker.internal");
 
 		Map<String, String> requestCriteria = Map.of("method", "ANY", "urlPattern", "/v1/inventory/.*");

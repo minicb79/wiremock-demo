@@ -73,3 +73,9 @@ tasks.named("startWiremock") {
     dependsOn("downloadOtelJavaagent", "buildStdoutRedirectAgent", "mergeWiremockSources")
 }
 
+tasks.register<Exec>("generateCertificates") {
+    group = "verification"
+    description = "Generates self-signed keystore and truststore files for local HTTPS testing."
+    commandLine("bash", "scripts/generate-certs.sh")
+}
+
