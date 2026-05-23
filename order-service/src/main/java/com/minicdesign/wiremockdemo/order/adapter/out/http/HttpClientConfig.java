@@ -13,22 +13,15 @@ import java.net.http.HttpClient;
 @Profile("!prod")
 public class HttpClientConfig {
 
-    @Bean
-    public HttpClient wiremockHttpClient() {
-        return HttpClient.newBuilder()
-                .version(HttpClient.Version.HTTP_1_1)
-                .build();
-    }
+	@Bean
+	public HttpClient wiremockHttpClient() {
+		return HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build();
+	}
 
-    @Bean
-    public RestClient wiremockRestClient(
-            HttpClient wiremockHttpClient,
-            @Value("${services.wiremock.base-url:http://localhost:8092}") String wiremockBaseUrl
-    ) {
-        JdkClientHttpRequestFactory requestFactory = new JdkClientHttpRequestFactory(wiremockHttpClient);
-        return RestClient.builder()
-                .baseUrl(wiremockBaseUrl)
-                .requestFactory(requestFactory)
-                .build();
-    }
+	@Bean
+	public RestClient wiremockRestClient(HttpClient wiremockHttpClient,
+			@Value("${services.wiremock.base-url:http://localhost:8092}") String wiremockBaseUrl) {
+		JdkClientHttpRequestFactory requestFactory = new JdkClientHttpRequestFactory(wiremockHttpClient);
+		return RestClient.builder().baseUrl(wiremockBaseUrl).requestFactory(requestFactory).build();
+	}
 }

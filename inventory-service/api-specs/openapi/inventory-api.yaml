@@ -9,7 +9,7 @@ servers:
     description: Local development server
 
 paths:
-  /inventory/{productId}:
+  /v1/inventory/{productId}:
     get:
       summary: Get inventory for a product
       description: Returns the current stock availability for the given product ID.

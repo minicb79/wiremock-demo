@@ -9,28 +9,27 @@ import static org.mockito.Mockito.*;
 
 public class InventoryServiceTest {
 
-    @Test
-    public void shouldReturnItemWhenExists() {
-        InventoryRepository repository = mock(InventoryRepository.class);
-        InventoryItem mockItem = new InventoryItem("PROD-001", 100, true);
-        when(repository.findByProductId("PROD-001")).thenReturn(mockItem);
+	@Test
+	public void shouldReturnItemWhenExists() {
+		InventoryRepository repository = mock(InventoryRepository.class);
+		InventoryItem mockItem = new InventoryItem("PROD-001", 100, true);
+		when(repository.findByProductId("PROD-001")).thenReturn(mockItem);
 
-        InventoryService service = new InventoryService(repository);
-        InventoryItem result = service.getInventory("PROD-001");
+		InventoryService service = new InventoryService(repository);
+		InventoryItem result = service.getInventory("PROD-001");
 
-        assertNotNull(result);
-        assertEquals(100, result.quantity());
-        assertTrue(result.available());
-    }
+		assertNotNull(result);
+		assertEquals(100, result.quantity());
+		assertTrue(result.available());
+	}
 
-    @Test
-    public void shouldReturnNullWhenNotExists() {
-        InventoryRepository repository = mock(InventoryRepository.class);
-        when(repository.findByProductId("UNKNOWN")).thenReturn(null);
+	@Test
+	public void shouldThrowInventoryItemNotFoundExceptionWhenNotExists() {
+		InventoryRepository repository = mock(InventoryRepository.class);
+		when(repository.findByProductId("UNKNOWN")).thenReturn(null);
 
-        InventoryService service = new InventoryService(repository);
-        InventoryItem result = service.getInventory("UNKNOWN");
+		InventoryService service = new InventoryService(repository);
 
-        assertNull(result);
-    }
+		assertThrows(InventoryItemNotFoundException.class, () -> service.getInventory("UNKNOWN"));
+	}
 }

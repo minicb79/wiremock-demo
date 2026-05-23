@@ -13,21 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 public class InventoryController implements InventoryApi {
-    private final GetInventoryUseCase getInventoryUseCase;
+	private final GetInventoryUseCase getInventoryUseCase;
 
-    @Override
-    public ResponseEntity<InventoryResponse> getInventory(String productId) {
-        log.info("GET /inventory/{} received", productId);
-        InventoryItem item = getInventoryUseCase.getInventory(productId);
-        if (item == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        InventoryResponse response = new InventoryResponse(
-                item.productId(),
-                item.quantity(),
-                item.available()
-        );
-        return ResponseEntity.ok(response);
-    }
+	@Override
+	public ResponseEntity<InventoryResponse> getInventory(String productId) {
+		log.info("GET /v1/inventory/{} received", productId);
+		InventoryItem item = getInventoryUseCase.getInventory(productId);
+		InventoryResponse response = new InventoryResponse(item.productId(), item.quantity(), item.available());
+		return ResponseEntity.ok(response);
+	}
 }

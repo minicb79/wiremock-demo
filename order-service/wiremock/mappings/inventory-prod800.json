@@ -2,7 +2,7 @@
   "name": "get_inventory_prod800_low_stock",
   "request": {
     "method": "GET",
-    "url": "/inventory/PROD-800"
+    "url": "/v1/inventory/PROD-800"
   },
   "response": {
     "status": 200,

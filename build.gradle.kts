@@ -69,7 +69,7 @@ tasks.register("buildStdoutRedirectAgent") {
     }
 }
 
-tasks.named("startWiremockContainer") {
+tasks.named("startWiremock") {
     dependsOn("downloadOtelJavaagent", "buildStdoutRedirectAgent", "mergeWiremockSources")
 }
 

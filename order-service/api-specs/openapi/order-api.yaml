@@ -9,7 +9,7 @@ servers:
     description: Local development server
 
 paths:
-  /orders:
+  /v1/orders:
     post:
       summary: Place a new order
       description: Creates a new order after verifying stock availability with the inventory service.

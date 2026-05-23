@@ -14,34 +14,29 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 public class OrderService implements PlaceOrderUseCase {
-    private final InventoryPort inventoryPort;
+	private final InventoryPort inventoryPort;
 
-    @Override
-    public Order placeOrder(String productId, int quantity) {
-        log.info("Placing order for productId={} quantity={}", productId, quantity);
+	@Override
+	public Order placeOrder(String productId, int quantity) {
+		log.info("Placing order for productId={} quantity={}", productId, quantity);
 
-        Integer availableQuantity = inventoryPort.getAvailableQuantity(productId);
+		Integer availableQuantity = inventoryPort.getAvailableQuantity(productId);
 
-        if (availableQuantity == null) {
-            log.warn("Product not found in inventory: productId={}", productId);
-            throw new ProductNotFoundException(productId);
-        }
+		if (availableQuantity == null) {
+			log.warn("Product not found in inventory: productId={}", productId);
+			throw new ProductNotFoundException(productId);
+		}
 
-        String rawUuid = UUID.randomUUID().toString();
-        String orderId = "ORD-" + rawUuid.substring(0, Math.min(rawUuid.length(), 8));
+		String rawUuid = UUID.randomUUID().toString();
+		String orderId = "ORD-" + rawUuid.substring(0, Math.min(rawUuid.length(), 8));
 
-        if (availableQuantity >= quantity) {
-            log.info("Order confirmed orderId={} productId={} quantity={}", orderId, productId, quantity);
-            return new Order(orderId, productId, quantity, OrderStatus.CONFIRMED);
-        } else {
-            log.warn(
-                    "Insufficient stock for orderId={} productId={} requested={} available={}",
-                    orderId,
-                    productId,
-                    quantity,
-                    availableQuantity
-            );
-            return new Order(orderId, productId, quantity, OrderStatus.REJECTED);
-        }
-    }
+		if (availableQuantity >= quantity) {
+			log.info("Order confirmed orderId={} productId={} quantity={}", orderId, productId, quantity);
+			return new Order(orderId, productId, quantity, OrderStatus.CONFIRMED);
+		} else {
+			log.warn("Insufficient stock for orderId={} productId={} requested={} available={}", orderId, productId,
+					quantity, availableQuantity);
+			return new Order(orderId, productId, quantity, OrderStatus.REJECTED);
+		}
+	}
 }

@@ -224,7 +224,7 @@
     "tags": [],
     "title": "Create Wiremock forward proxy for all non-prod environments",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -246,7 +246,7 @@
     "tags": [],
     "title": "Create local environment initializer for Wiremock ",
     "description": "Create a catch all mapping and publish it to wiremock on application startup.",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -258,6 +258,129 @@
         "minute": 54,
         "second": 14,
         "nano": 904853000
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 5,
+        "minute": 12,
+        "second": 13,
+        "nano": 890068000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_138",
+    "priority": "LOW",
+    "tags": [],
+    "title": "API Versioning",
+    "description": "",
+    "status": "IN_PROGRESS",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 5,
+        "minute": 12,
+        "second": 53,
+        "nano": 608503000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_149",
+    "priority": "LOW",
+    "tags": [],
+    "title": "ArchUnit integration",
+    "description": "ArchUnit doesn\u0027t need to be part of the default Java Plugin, but it should probably sit as part of the Spring plugin.\n\nThis should be another \"include by composition\" thing.",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 5,
+        "minute": 15,
+        "second": 6,
+        "nano": 583853000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_161",
+    "priority": "LOW",
+    "tags": [],
+    "title": "Second external interface",
+    "description": "Create another API - Payments. Use a stub to return values.\nFor different results, use either:\n  - card numbers,\n  - expiry,\n  - value,\n  - combination.",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 5,
+        "minute": 18,
+        "second": 53,
+        "nano": 171882000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_174",
+    "priority": "LOW",
+    "tags": [],
+    "title": "Security",
+    "description": "Add Spring-Security. JWT via Auth0 or KeyCloak, and Certificates.",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 5,
+        "minute": 20,
+        "second": 5,
+        "nano": 347317000
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_201",
+    "priority": "LOW",
+    "tags": [],
+    "title": "AWS deployment - certificate management",
+    "description": "Use Floci to deploy to AWS.\n\n- Use ACM for certificates.\n- Use API G/W for routing.\n- Use CloudWatch for logs. (or continue with Grafana)\n- Use ECS Fargate for docker container deployment.\n- Use Authenticator Lambdas to check Auth0 access.\n- ...\n\nHow do we deploy to Floci?",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 5,
+        "minute": 54,
+        "second": 18,
+        "nano": 189945000
       }
     },
     "isImported": false

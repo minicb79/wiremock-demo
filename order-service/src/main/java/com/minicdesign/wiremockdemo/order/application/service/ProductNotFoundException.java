@@ -1,8 +1,12 @@
 package com.minicdesign.wiremockdemo.order.application.service;
 
-@SuppressWarnings("serial")
+import java.io.Serial;
+
 public class ProductNotFoundException extends RuntimeException {
-    public ProductNotFoundException(String productId) {
-        super("Product not found: " + productId);
-    }
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+	public ProductNotFoundException(String productId) {
+		super("Product not found: " + productId);
+	}
 }

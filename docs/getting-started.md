@@ -90,7 +90,7 @@ You can pass command-line arguments to override these flags or active profiles:
 ### Check inventory for a product
 
 ```bash
-curl -s http://localhost:8081/inventory/PROD-001 | jq
+curl -s http://localhost:8081/v1/inventory/PROD-001 | jq
 ```
 
 Expected response:
@@ -105,7 +105,7 @@ Expected response:
 ### Place a successful order
 
 ```bash
-curl -s -X POST http://localhost:8082/orders \
+curl -s -X POST http://localhost:8082/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"productId": "PROD-001", "quantity": 5}' | jq
 ```
@@ -123,7 +123,7 @@ Expected response:
 ### Place an order rejected due to no stock
 
 ```bash
-curl -s -X POST http://localhost:8082/orders \
+curl -s -X POST http://localhost:8082/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"productId": "PROD-003", "quantity": 1}' | jq
 ```
@@ -141,7 +141,7 @@ Expected response (`409 Conflict`):
 ### Place an order for an unknown product
 
 ```bash
-curl -s -X POST http://localhost:8082/orders \
+curl -s -X POST http://localhost:8082/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"productId": "PROD-999", "quantity": 1}' | jq
 ```

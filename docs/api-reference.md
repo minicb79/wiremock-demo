@@ -4,7 +4,7 @@
 
 ## inventory-service — `http://localhost:8081`
 
-### GET `/inventory/{productId}`
+### GET `/v1/inventory/{productId}`
 
 Returns the current stock availability for a product.
 
@@ -24,7 +24,7 @@ Returns the current stock availability for a product.
 **Example — product in stock**
 
 ```bash
-curl -s http://localhost:8081/inventory/PROD-001 | jq
+curl -s http://localhost:8081/v1/inventory/PROD-001 | jq
 ```
 
 ```json
@@ -38,7 +38,7 @@ curl -s http://localhost:8081/inventory/PROD-001 | jq
 **Example — product out of stock**
 
 ```bash
-curl -s http://localhost:8081/inventory/PROD-003 | jq
+curl -s http://localhost:8081/v1/inventory/PROD-003 | jq
 ```
 
 ```json
@@ -52,7 +52,7 @@ curl -s http://localhost:8081/inventory/PROD-003 | jq
 **Example — product not found**
 
 ```bash
-curl -s http://localhost:8081/inventory/PROD-999 | jq
+curl -s http://localhost:8081/v1/inventory/PROD-999 | jq
 ```
 
 ```json
@@ -74,7 +74,7 @@ curl -s http://localhost:8081/inventory/PROD-999 | jq
 
 ## order-service — `http://localhost:8082`
 
-### POST `/orders`
+### POST `/v1/orders`
 
 Places a new order. Internally calls `inventory-service` to check stock availability before confirming.
 
@@ -96,7 +96,7 @@ Places a new order. Internally calls `inventory-service` to check stock availabi
 **Example — confirmed order**
 
 ```bash
-curl -s -X POST http://localhost:8082/orders \
+curl -s -X POST http://localhost:8082/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"productId": "PROD-001", "quantity": 5}' | jq
 ```
@@ -113,7 +113,7 @@ curl -s -X POST http://localhost:8082/orders \
 **Example — rejected order (no stock)**
 
 ```bash
-curl -s -X POST http://localhost:8082/orders \
+curl -s -X POST http://localhost:8082/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"productId": "PROD-003", "quantity": 1}' | jq
 ```
@@ -130,7 +130,7 @@ curl -s -X POST http://localhost:8082/orders \
 **Example — product not found**
 
 ```bash
-curl -s -X POST http://localhost:8082/orders \
+curl -s -X POST http://localhost:8082/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"productId": "PROD-999", "quantity": 1}' | jq
 ```
@@ -145,7 +145,7 @@ curl -s -X POST http://localhost:8082/orders \
 **Tip**: The `X-Trace-Id` response header contains the distributed trace ID. Use it in Grafana → Tempo to view the full cross-service trace.
 
 ```bash
-curl -si -X POST http://localhost:8082/orders \
+curl -si -X POST http://localhost:8082/v1/orders \
   -H "Content-Type: application/json" \
   -d '{"productId": "PROD-001", "quantity": 2}' | grep -i x-trace-id
 ```

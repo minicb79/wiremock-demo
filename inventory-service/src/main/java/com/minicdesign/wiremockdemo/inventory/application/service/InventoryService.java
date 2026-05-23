@@ -11,17 +11,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class InventoryService implements GetInventoryUseCase {
-    private final InventoryRepository inventoryRepository;
+	private final InventoryRepository inventoryRepository;
 
-    @Override
-    public InventoryItem getInventory(String productId) {
-        log.info("Fetching inventory for productId={}", productId);
-        InventoryItem item = inventoryRepository.findByProductId(productId);
-        if (item == null) {
-            log.warn("No inventory found for productId={}", productId);
-        } else {
-            log.info("Inventory found for productId={} quantity={} available={}", productId, item.quantity(), item.available());
-        }
-        return item;
-    }
+	@Override
+	public InventoryItem getInventory(String productId) {
+		log.info("Fetching inventory for productId={}", productId);
+		InventoryItem item = inventoryRepository.findByProductId(productId);
+		if (item == null) {
+			log.warn("No inventory found for productId={}", productId);
+			throw new InventoryItemNotFoundException(productId);
+		} else {
+			log.info("Inventory found for productId={} quantity={} available={}", productId, item.quantity(),
+					item.available());
+		}
+		return item;
+	}
 }

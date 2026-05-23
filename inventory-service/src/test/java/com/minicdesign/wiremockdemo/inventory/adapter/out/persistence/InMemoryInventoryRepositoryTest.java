@@ -6,18 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryInventoryRepositoryTest {
 
-    @Test
-    void shouldFindItem() {
-        InMemoryInventoryRepository repo = new InMemoryInventoryRepository();
-        InventoryItem item = repo.findByProductId("PROD-001");
-        assertNotNull(item);
-        assertEquals(100, item.quantity());
-    }
+	@Test
+	void shouldFindItem() {
+		InMemoryInventoryRepository repo = new InMemoryInventoryRepository();
+		InventoryItem item = repo.findByProductId("PROD-001");
+		assertNotNull(item);
+		assertEquals(100, item.quantity());
+	}
 
-    @Test
-    void shouldNotFindItem() {
-        InMemoryInventoryRepository repo = new InMemoryInventoryRepository();
-        InventoryItem item = repo.findByProductId("UNKNOWN");
-        assertNull(item);
-    }
+	@Test
+	void shouldNotFindItem() {
+		InMemoryInventoryRepository repo = new InMemoryInventoryRepository();
+		InventoryItem item = repo.findByProductId("UNKNOWN");
+		assertNull(item);
+	}
 }
