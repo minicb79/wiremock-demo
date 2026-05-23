@@ -281,7 +281,7 @@
     "tags": [],
     "title": "API Versioning",
     "description": "",
-    "status": "IN_PROGRESS",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -295,6 +295,19 @@
         "nano": 608503000
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 6,
+        "minute": 30,
+        "second": 4,
+        "nano": 272545000
+      }
+    },
     "isImported": false
   },
   {
@@ -303,7 +316,7 @@
     "tags": [],
     "title": "ArchUnit integration",
     "description": "ArchUnit doesn\u0027t need to be part of the default Java Plugin, but it should probably sit as part of the Spring plugin.\n\nThis should be another \"include by composition\" thing.",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -315,6 +328,19 @@
         "minute": 15,
         "second": 6,
         "nano": 583853000
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 5,
+        "day": 24
+      },
+      "time": {
+        "hour": 6,
+        "minute": 51,
+        "second": 41,
+        "nano": 461439000
       }
     },
     "isImported": false
@@ -347,7 +373,7 @@
     "tags": [],
     "title": "Security",
     "description": "Add Spring-Security. JWT via Auth0 or KeyCloak, and Certificates.",
-    "status": "TODO",
+    "status": "IN_PROGRESS",
     "date": {
       "date": {
         "year": 2026,
