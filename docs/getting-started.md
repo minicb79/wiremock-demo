@@ -163,3 +163,72 @@ Expected response (`404 Not Found`):
 ```
 
 Services can be stopped with `Ctrl+C` in each terminal.
+
+---
+
+## 6. Running with Security (HTTPS & Mutual TLS)
+
+The system supports end-to-end HTTPS and Mutual TLS (mTLS) authentication. This security layer is disabled by default and can be enabled behind a feature flag for local testing.
+
+### Start the Services with HTTPS enabled
+
+Pass the `--feature.security-https-enabled=true` argument to Spring Boot:
+
+```bash
+# Terminal 1 — Inventory Service (port 8081 over HTTPS/mTLS)
+./gradlew :inventory-service:bootRun --args="--feature.security-https-enabled=true"
+
+# Terminal 2 — Order Service (port 8082 over HTTPS/mTLS)
+./gradlew :order-service:bootRun --args="--feature.security-https-enabled=true"
+```
+
+### Start WireMock with HTTPS enabled
+
+If you are using WireMock (for proxying or mocking), you must also start it with HTTPS enabled by passing the `wiremock.https` project property:
+
+```bash
+# Terminal 3 — WireMock (port 8092 HTTP and 8443 HTTPS)
+./gradlew startWiremockLocal -Pwiremock.https=true
+```
+
+### Verifying with Curl (Mutual TLS Handshake)
+
+Since the services are configured with `client-auth: need`, the server **requires** clients to present a valid certificate. 
+
+1. **Attempting a connection without a client certificate (Fails):**
+   ```bash
+   curl -k https://localhost:8081/v1/inventory/PROD-001
+   ```
+   *Expected result: Handshake failure / connection closed by peer.*
+
+2. **Providing the PKCS12 keystore containing the client certificate (Succeeds):**
+   ```bash
+   curl -k --cert-type P12 --cert order-service/src/main/resources/certificates/keystore.p12:changeit \
+     https://localhost:8081/v1/inventory/PROD-001
+   ```
+   *Expected response:*
+   ```json
+   {
+     "productId": "PROD-001",
+     "quantity": 100,
+     "available": true
+   }
+   ```
+
+3. **Placing a secure order through order-service (Succeeds):**
+   ```bash
+   curl -k --cert-type P12 --cert order-service/src/main/resources/certificates/keystore.p12:changeit \
+     -H "Content-Type: application/json" \
+     -d '{"productId": "PROD-001", "quantity": 5}' \
+     https://localhost:8082/v1/orders
+   ```
+   *Expected response:*
+   ```json
+   {
+     "orderId": "ORD-xxxxxxxx",
+     "productId": "PROD-001",
+     "quantity": 5,
+     "status": "CONFIRMED"
+   }
+   ```
+

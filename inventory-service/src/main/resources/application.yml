@@ -4,6 +4,16 @@ spring:
 
 server:
   port: 8081
+  ssl:
+    enabled: ${feature.security-https-enabled:false}
+    client-auth: need
+    key-store: classpath:certificates/keystore.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
+    key-alias: wiremock-demo
+    trust-store: classpath:certificates/truststore.p12
+    trust-store-password: changeit
+    trust-store-type: PKCS12
 
 management:
   endpoints:

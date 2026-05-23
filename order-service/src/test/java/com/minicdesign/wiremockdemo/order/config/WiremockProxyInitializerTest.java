@@ -22,7 +22,7 @@ public class WiremockProxyInitializerTest {
 	public void shouldNotRegisterProxyMappingWhenFeatureIsDisabled() {
 		RestClient restClient = mock(RestClient.class);
 		ObjectMapper objectMapper = new ObjectMapper();
-		WiremockProxyInitializer initializer = new WiremockProxyInitializer(restClient, objectMapper, false,
+		WiremockProxyInitializer initializer = new WiremockProxyInitializer(restClient, objectMapper, false, false,
 				"http://localhost:8081");
 
 		initializer.run();
@@ -49,7 +49,7 @@ public class WiremockProxyInitializerTest {
 		when(responseSpec.toBodilessEntity()).thenReturn(responseEntity);
 		when(responseEntity.getStatusCode()).thenReturn(HttpStatus.OK);
 
-		WiremockProxyInitializer initializer = new WiremockProxyInitializer(restClient, objectMapper, true,
+		WiremockProxyInitializer initializer = new WiremockProxyInitializer(restClient, objectMapper, true, false,
 				"http://localhost:8081");
 
 		initializer.run();
@@ -75,7 +75,7 @@ public class WiremockProxyInitializerTest {
 		when(restClient.post()).thenThrow(new RuntimeException("Connection refused"));
 		ObjectMapper objectMapper = new ObjectMapper();
 
-		WiremockProxyInitializer initializer = new WiremockProxyInitializer(restClient, objectMapper, true,
+		WiremockProxyInitializer initializer = new WiremockProxyInitializer(restClient, objectMapper, true, false,
 				"http://localhost:8081");
 
 		assertDoesNotThrow(() -> initializer.run());
