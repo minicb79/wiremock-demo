@@ -23,10 +23,12 @@ This will:
 
 ---
 
-## 2. Start the Grafana Observability Stack
+## 2. Start the Docker stacks
+
+### Start the Grafana Observability Stack
 
 ```bash
-./gradlew startGrafanaContainer
+./gradlew startGrafana
 ```
 
 This starts the `grafana/otel-lgtm` container providing:
@@ -40,7 +42,26 @@ This starts the `grafana/otel-lgtm` container providing:
 To check the stack status:
 
 ```bash
-./gradlew checkGrafanaContainer
+./gradlew checkGrafana
+```
+
+### Start the WireMock Server
+
+```bash
+./gradlew startWiremock
+```
+
+This starts the `wiremock/wiremock:2.35.0` container on port `8080` with the following mappings:
+
+| Component       | URL                                  |
+|-----------------|--------------------------------------|
+| WireMock        | http://localhost:8092                |
+| WireMock Web UI | http://localhost:8092/__admin/webapp |
+
+To check the stack status:
+
+```bash
+./gradlew checkWiremock
 ```
 
 ---
@@ -158,8 +179,9 @@ Expected response (`404 Not Found`):
 
 ## 5. Stop Everything
 
-```bash
-./gradlew stopGrafanaContainer
-```
-
 Services can be stopped with `Ctrl+C` in each terminal.
+
+```bash
+./gradlew stopWiremock
+./gradlew stopGrafana
+```
