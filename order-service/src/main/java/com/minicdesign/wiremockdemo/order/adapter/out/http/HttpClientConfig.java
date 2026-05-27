@@ -1,6 +1,7 @@
 package com.minicdesign.wiremockdemo.order.adapter.out.http;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,6 +12,7 @@ import java.net.http.HttpClient;
 
 @Configuration
 @Profile("!prod")
+@ConditionalOnProperty(name = "feature.security-https-enabled", havingValue = "false", matchIfMissing = true)
 public class HttpClientConfig {
 
 	@Bean

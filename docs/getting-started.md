@@ -212,7 +212,7 @@ If you are using WireMock (for proxying or mocking), you must also start it with
 
 ```bash
 # Terminal 3 — WireMock (port 8092 HTTP and 8443 HTTPS)
-./gradlew startWiremockLocal -Pwiremock.https=true
+./gradlew startWiremock -Pwiremock.https=true
 ```
 
 ### Verifying with Curl (Mutual TLS Handshake)

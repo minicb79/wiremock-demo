@@ -3,7 +3,16 @@ spring:
     activate:
       on-profile: local
 
+server:
+  port: 8482
+
+services:
+  inventory:
+    base-url: https://localhost:8481
+  wiremock:
+    base-url: https://localhost:8443
+
 feature:
   wiremock-via-interceptor: false
-  wiremock-as-proxy: false
+  wiremock-as-proxy: true
   wiremock-use-forward-proxy: false

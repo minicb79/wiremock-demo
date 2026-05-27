@@ -7,6 +7,11 @@ wiremock {
     port.set(8092)
 }
 
+dockerCompose {
+    dockerComposePath.set("/opt/homebrew/bin/docker-compose")
+    dockerPath.set("/opt/homebrew/bin/docker")
+}
+
 tasks.register("downloadOtelJavaagent") {
     val destFile = file("docker/wiremock/libs/opentelemetry-javaagent.jar")
     outputs.file(destFile)

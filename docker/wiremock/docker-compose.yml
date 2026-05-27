@@ -15,7 +15,17 @@ services:
       - "${WIREMOCK_HTTPS_PORT:-8443}:8443"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    command: --https-port=8443 --verbose
+    command: >
+      --https-port 8443
+      --https-keystore /home/wiremock/certificates/keystore.p12
+      --keystore-password changeit
+      --key-manager-password changeit
+      --keystore-type PKCS12
+      --https-truststore /home/wiremock/certificates/keystore.p12
+      --truststore-password changeit
+      --truststore-type PKCS12
+      --https-require-client-cert
+      --verbose
     environment:
       - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-wiremock-service}
       - OTEL_RESOURCE_ATTRIBUTES=service.name=${OTEL_SERVICE_NAME:-wiremock-service},env=local
@@ -28,6 +38,7 @@ services:
     volumes:
       - ${WIREMOCK_DATA_DIR:-./mocks}:/home/wiremock
       - ./libs:/home/libs
+      - ../../order-service/src/main/resources/certificates:/home/wiremock/certificates
     networks:
       - poc-network
 

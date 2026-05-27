@@ -3,7 +3,7 @@ spring:
     name: inventory-service
 
 server:
-  port: 8081
+  port: 8481
   ssl:
     enabled: ${feature.security-https-enabled:false}
     client-auth: need
@@ -14,6 +14,12 @@ server:
     trust-store: classpath:certificates/truststore.p12
     trust-store-password: changeit
     trust-store-type: PKCS12
+
+feature:
+  wiremock-via-interceptor: false
+  wiremock-as-proxy: false
+  wiremock-use-forward-proxy: false
+  security-https-enabled: true
 
 management:
   endpoints:

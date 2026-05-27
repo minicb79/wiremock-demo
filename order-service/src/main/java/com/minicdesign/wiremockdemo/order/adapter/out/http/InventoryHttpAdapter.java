@@ -39,10 +39,17 @@ public class InventoryHttpAdapter implements InventoryPort {
 		String localWiremockBaseUrl = wiremockBaseUrl;
 
 		if (httpsEnabled) {
-			if (localInventoryBaseUrl.startsWith("http://")) {
+			if (localInventoryBaseUrl.startsWith("http://localhost:8081")) {
+				localInventoryBaseUrl = "https://localhost:8481"
+						+ localInventoryBaseUrl.substring("http://localhost:8081".length());
+			} else if (localInventoryBaseUrl.startsWith("http://")) {
 				localInventoryBaseUrl = localInventoryBaseUrl.replace("http://", "https://");
 			}
-			if (localWiremockBaseUrl.startsWith("http://")) {
+
+			if (localWiremockBaseUrl.startsWith("http://localhost:8092")) {
+				localWiremockBaseUrl = "https://localhost:8443"
+						+ localWiremockBaseUrl.substring("http://localhost:8092".length());
+			} else if (localWiremockBaseUrl.startsWith("http://")) {
 				localWiremockBaseUrl = localWiremockBaseUrl.replace("http://", "https://");
 			}
 		}

@@ -45,13 +45,13 @@ logging:
 
 services:
   inventory:
-    base-url: http://localhost:8081
+    base-url: https://localhost:8481
   wiremock:
-    base-url: http://localhost:8092
+    base-url: https://localhost:8443
 
 feature:
   wiremock-via-interceptor: false
   wiremock-as-proxy: false
   wiremock-use-forward-proxy: false
-  security-https-enabled: false
+  security-https-enabled: true
 

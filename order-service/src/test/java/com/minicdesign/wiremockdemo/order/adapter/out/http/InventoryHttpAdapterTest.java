@@ -48,13 +48,13 @@ public class InventoryHttpAdapterTest {
 				true, // httpsEnabled
 				interceptorProvider);
 
-		verify(builder).baseUrl("https://localhost:8081");
+		verify(builder).baseUrl("https://localhost:8481");
 
 		ArgumentCaptor<ClientHttpRequestFactory> factoryCaptor = ArgumentCaptor
 				.forClass(ClientHttpRequestFactory.class);
 		verify(builder).requestFactory(factoryCaptor.capture());
 
-		assertTrue(factoryCaptor.getValue() instanceof JdkClientHttpRequestFactory);
+        assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
 	}
 
 	@Test
@@ -73,12 +73,12 @@ public class InventoryHttpAdapterTest {
 				interceptorProvider);
 
 		// In reverse proxy, it should point to WireMock URL converted to HTTPS
-		verify(builder).baseUrl("https://localhost:8092");
+		verify(builder).baseUrl("https://localhost:8443");
 
 		ArgumentCaptor<ClientHttpRequestFactory> factoryCaptor = ArgumentCaptor
 				.forClass(ClientHttpRequestFactory.class);
 		verify(builder).requestFactory(factoryCaptor.capture());
-		assertTrue(factoryCaptor.getValue() instanceof JdkClientHttpRequestFactory);
+        assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
 	}
 
 	@Test
@@ -97,11 +97,11 @@ public class InventoryHttpAdapterTest {
 				interceptorProvider);
 
 		// In forward proxy, final base URL is the inventory-service itself (HTTPS)
-		verify(builder).baseUrl("https://localhost:8081");
+		verify(builder).baseUrl("https://localhost:8481");
 
 		ArgumentCaptor<ClientHttpRequestFactory> factoryCaptor = ArgumentCaptor
 				.forClass(ClientHttpRequestFactory.class);
 		verify(builder).requestFactory(factoryCaptor.capture());
-		assertTrue(factoryCaptor.getValue() instanceof JdkClientHttpRequestFactory);
+        assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
 	}
 }

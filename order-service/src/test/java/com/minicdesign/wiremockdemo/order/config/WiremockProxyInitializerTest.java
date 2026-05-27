@@ -1,13 +1,12 @@
 package com.minicdesign.wiremockdemo.order.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -32,7 +31,7 @@ public class WiremockProxyInitializerTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void shouldRegisterProxyMappingWhenFeatureIsEnabled() throws IOException {
+	public void shouldRegisterProxyMappingWhenFeatureIsEnabled() {
 		RestClient restClient = mock(RestClient.class);
 		RestClient.RequestBodyUriSpec postSpec = mock(RestClient.RequestBodyUriSpec.class);
 		RestClient.RequestBodySpec bodySpec = mock(RestClient.RequestBodySpec.class);
