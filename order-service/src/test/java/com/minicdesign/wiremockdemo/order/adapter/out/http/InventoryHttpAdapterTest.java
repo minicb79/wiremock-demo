@@ -54,7 +54,7 @@ public class InventoryHttpAdapterTest {
 				.forClass(ClientHttpRequestFactory.class);
 		verify(builder).requestFactory(factoryCaptor.capture());
 
-        assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
+		assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class InventoryHttpAdapterTest {
 		ArgumentCaptor<ClientHttpRequestFactory> factoryCaptor = ArgumentCaptor
 				.forClass(ClientHttpRequestFactory.class);
 		verify(builder).requestFactory(factoryCaptor.capture());
-        assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
+		assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
 	}
 
 	@Test
@@ -102,6 +102,6 @@ public class InventoryHttpAdapterTest {
 		ArgumentCaptor<ClientHttpRequestFactory> factoryCaptor = ArgumentCaptor
 				.forClass(ClientHttpRequestFactory.class);
 		verify(builder).requestFactory(factoryCaptor.capture());
-        assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
+		assertInstanceOf(JdkClientHttpRequestFactory.class, factoryCaptor.getValue());
 	}
 }
