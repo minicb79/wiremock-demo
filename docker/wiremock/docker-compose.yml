@@ -25,8 +25,9 @@ services:
       --truststore-password changeit
       --truststore-type PKCS12
       --https-require-client-cert
-      --verbose
+      ${WIREMOCK_VERBOSE_FLAG:---verbose}
     environment:
+      - WIREMOCK_LOG_FILTER=${WIREMOCK_LOG_FILTER:-true}
       - OTEL_SERVICE_NAME=${OTEL_SERVICE_NAME:-wiremock-service}
       - OTEL_RESOURCE_ATTRIBUTES=service.name=${OTEL_SERVICE_NAME:-wiremock-service},env=local
       - OTEL_LOGS_EXPORTER=otlp

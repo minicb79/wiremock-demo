@@ -10,8 +10,12 @@ import java.util.logging.Logger;
 
 public class StdoutRedirectAgent {
     private static final ThreadLocal<Boolean> IN_LOGGING = ThreadLocal.withInitial(() -> false);
+    private static boolean filterEnabled = false;
 
     public static void premain(String agentArgs, Instrumentation inst) {
+        String filterEnv = System.getenv("WIREMOCK_LOG_FILTER");
+        filterEnabled = "true".equalsIgnoreCase(filterEnv);
+
         PrintStream originalOut = System.out;
         PrintStream originalErr = System.err;
         System.setOut(new PrintStream(new LoggingOutputStream(Logger.getLogger("stdout"), Level.INFO, originalOut), true));
@@ -49,6 +53,9 @@ public class StdoutRedirectAgent {
             if (bytes.length > 0) {
                 String message = new String(bytes).trim();
                 if (!message.isEmpty()) {
+                    if (filterEnabled && shouldIgnore(message)) {
+                        return;
+                    }
                     IN_LOGGING.set(true);
                     try {
                         logger.log(level, message);
@@ -57,6 +64,13 @@ public class StdoutRedirectAgent {
                     }
                 }
             }
+        }
+
+        private boolean shouldIgnore(String message) {
+            return message.contains("/health") || 
+                   message.contains("/__admin/health") || 
+                   message.contains("GET / ") ||
+                   message.contains("GET /health");
         }
 
         @Override
